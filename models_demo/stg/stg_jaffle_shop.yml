@@ -1,0 +1,60 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: one unique customer per row
+    columns:
+      - name: customer_id
+        description: PK for stg_customers
+        tests:
+          - unique
+          - not_null
+    
+  - name: stg_orders
+    description: one unique order per row
+    columns:
+      - name: order_id
+        description: PK for stg_orders
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: FK from stg_orders to stg_customers
+        tests:
+          - not_null
+          - relationships:
+              to: ref("stg_customers")
+              field: customer_id
+      - name: status
+        description: '{{ doc("order_status") }}'
+        tests:
+          - accepted_values:
+              values:
+                - completed
+                - shipped
+                - returned
+                - return_pending
+                - placed
+
+  - name: stg_payments
+    description: match of payment method(s) for each order. 
+    columns:
+      - name: payment_id
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref("stg_orders")
+              field: order_id
+      - name: payment_method
+        tests:
+          - accepted_values:
+              values:
+                - credit_card
+                - coupon
+                - bank_transfer
+                - gift_card
+              

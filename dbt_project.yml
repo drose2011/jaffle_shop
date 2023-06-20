@@ -5,7 +5,7 @@ version: '0.1'
 
 profile: 'jaffle_shop'
 
-model-paths: ["models"]
+model-paths: ["models_demo"]
 seed-paths: ["seeds"]
 test-paths: ["tests"]
 analysis-paths: ["analysis"]
@@ -21,6 +21,7 @@ require-dbt-version: [">=1.0.0", "<2.0.0"]
 
 models:
   jaffle_shop:
+    marts:
       materialized: table
-      staging:
-        materialized: view
+    stg:
+      materialized: view
