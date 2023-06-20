@@ -1,0 +1,23 @@
+models:
+  - name: dim_customers
+    description: information regarding each customers order history 
+    columns:
+      - name: customer_id
+        description: PK for dim_customers table
+        tests:
+          - unique
+          - not_null
+      - name: lifetime_value
+        description: total amount this customer has spent across all orders and assoiated payments
+  
+  - name: fct_orders
+    description: table gathers all data for each individual customer
+    columns: 
+      - name: customer_id
+        description: PK for dim_customers table
+        tests:
+          - unique
+          - not_null
+      - name: lifetime_value
+        description: total amount this customer has spent across all orders and assoiated payments
+  

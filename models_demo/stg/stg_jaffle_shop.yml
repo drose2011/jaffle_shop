@@ -1,5 +1,3 @@
-version: 2
-
 models:
   - name: stg_customers
     description: one unique customer per row
@@ -40,10 +38,12 @@ models:
     description: match of payment method(s) for each order. 
     columns:
       - name: payment_id
+        description: PK for stg_payments
         tests:
           - unique
           - not_null
       - name: order_id
+        description: FK from stg_payments to stg_orders
         tests:
           - not_null
           - relationships:

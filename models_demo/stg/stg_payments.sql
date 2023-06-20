@@ -5,7 +5,7 @@ WITH renamed AS (
         payment_method,
         amount / 100 AS amount
 
-    FROM {{ source("jaffle_shop", "raw_payments") }}
+    FROM {{ ref("raw_payments") }}
 
 )
 

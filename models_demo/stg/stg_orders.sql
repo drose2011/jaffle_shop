@@ -4,6 +4,6 @@ WITH source AS (
         user_id AS customer_id,
         order_date,
         status
-    FROM {{ source("jaffle_shop", "raw_orders") }}
+    FROM {{ ref("raw_orders") }}
 )
 SELECT * FROM source;
